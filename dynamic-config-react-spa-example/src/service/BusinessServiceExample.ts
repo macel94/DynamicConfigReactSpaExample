@@ -1,4 +1,4 @@
-import { DynamicConfig } from "../configuration/config";
+import { DynamicConfig } from "../configuration/DynamicConfig";
 
 export class BusinessServiceExample {
   constructor(readonly config: DynamicConfig) {}

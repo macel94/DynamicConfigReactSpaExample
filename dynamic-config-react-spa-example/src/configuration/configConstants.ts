@@ -1,6 +1,4 @@
-export interface DynamicConfig {
-    apiUrl: string;
-}
+import { DynamicConfig } from "./DynamicConfig";
 
 export const defaultConfig: DynamicConfig = {
     apiUrl: "undefinedApiUrl",
