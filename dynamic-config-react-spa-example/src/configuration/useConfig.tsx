@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import { defaultConfig, DynamicConfig } from "./config";
 
 interface DynamicConfigContext {
@@ -16,11 +16,15 @@ export const useConfig = () => useContext(configContextObject);
 const ConfigContextProvider: React.FC = ({ children }: any) => {
     const [configState, setConfigState] = useState(defaultConfig);
 
+    const setConfig = useCallback((newConfig: DynamicConfig) => {
+        setConfigState(newConfig);
+    }, []);
+
     return (
         <configContextObject.Provider
             value={{
                 config: configState,
-                setConfig: setConfigState
+                setConfig: setConfig
             }}
         >
             {children}

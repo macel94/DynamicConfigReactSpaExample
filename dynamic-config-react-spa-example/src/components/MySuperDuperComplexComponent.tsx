@@ -6,13 +6,17 @@ const MySuperDuperComplexComponent: React.FC = () => {
     const { config } = useConfig();
     const service = useMemo(() => new BusinessServiceExample(config), [config]);
     const [apiUrl, setApiUrl] = useState("not set")
+    const [color, setColor] = useState("red");
 
     useEffect(() => {
-        setApiUrl(service.getSomeDataFromApi());
+        setTimeout(() => {
+            setApiUrl(service.getSomeDataFromApi());
+            setColor("green");
+        }, 1000);
     }, [service]);
 
     return (
-        <p>ApiUrl: {apiUrl}</p>
+        <h2 style={{ color }}>ApiUrl: {apiUrl}</h2>
     );
 };
 
