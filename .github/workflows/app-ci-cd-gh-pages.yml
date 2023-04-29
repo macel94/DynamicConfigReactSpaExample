@@ -1,0 +1,42 @@
+name: Deploy Web to GitHub Pages
+
+# Run workflow on every push to the master branch
+on:
+  push:
+    branches:
+      - master
+
+    paths:
+      - dynamic-config-react-spa-example/**
+      - .github/workflows/app-ci-cd-gh-pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-web-to-github-pages:
+    # use ubuntu-latest image to run steps on
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install dependencies
+        run: cd dynamic-config-react-spa-example && yarn
+
+      - name: Lint
+        run: cd dynamic-config-react-spa-example && yarn lint
+
+      - name: Build
+        run: cd dynamic-config-react-spa-example && yarn build
+
+      - name: Commit wwwroot to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./dynamic-config-react-spa-example/dist
+          branch: gh-pages
