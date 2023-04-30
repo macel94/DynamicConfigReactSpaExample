@@ -35,6 +35,9 @@ jobs:
       - name: Build
         run: cd dynamic-config-react-spa-example && yarn build
 
+      - name: Copy prod config.json to the dynamically loaded file location
+        run: cp dynamic-config-react-spa-example/dist/configs/prod/config.json dynamic-config-react-spa-example/dist/configs/config.json
+
       - name: Commit wwwroot to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
